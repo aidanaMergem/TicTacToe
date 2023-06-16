@@ -153,14 +153,14 @@ public class UserController {
 
     }
 
-    public void selectX(ActionEvent actionEvent) {
+    public void selectX() {
         turn.setText("X's turn");
         userItem.setText("X");
         computerItem.setText("O");
         currentPlayer = "X";
     }
 
-    public void selectO(ActionEvent actionEvent) {
+    public void selectO() {
         turn.setText("O's turn");
 
         userItem.setText("O");
@@ -169,7 +169,7 @@ public class UserController {
     }
 
 
-    public void restart(ActionEvent actionEvent) {
+    public void restart() {
 
         winnerLabel.setText("");
         restartAllBtn();
