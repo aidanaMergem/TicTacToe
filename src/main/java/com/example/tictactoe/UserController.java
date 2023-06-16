@@ -48,6 +48,7 @@ public class UserController {
 
     private String currentPlayer = "X";
 
+
     @FXML
     private void clickBtn(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
@@ -69,7 +70,19 @@ public class UserController {
         }
     }
 
+    private static boolean isBoardFull(String board[][]) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j].equals("")) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private void checkWinner() {
+
         String[][] board = {
                 {btn00.getText(), btn01.getText(), btn02.getText()},
                 {btn10.getText(), btn11.getText(), btn12.getText()},
@@ -101,11 +114,17 @@ public class UserController {
         if (!board[0][2].isEmpty() && board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0])) {
             displayWinner(board[0][2]);
         }
+
+        if (isBoardFull(board)) {
+            winnerLabel.setText("It's a tie!");
+        }
     }
 
     private void displayWinner(String winner) {
+
         winnerLabel.setText("Winner: " + winner);
         disableButtons();
+
     }
 
     private void disableButtons() {
@@ -121,19 +140,32 @@ public class UserController {
     }
 
     public void selectX(ActionEvent actionEvent) {
+        turn.setText("X's turn");
         userItem.setText("X");
         computerItem.setText("O");
         currentPlayer = "X";
     }
 
     public void selectO(ActionEvent actionEvent) {
+        turn.setText("O's turn");
+
         userItem.setText("O");
         computerItem.setText("X");
-        currentPlayer ="O";
+        currentPlayer = "O";
     }
 
 
     public void restart(ActionEvent actionEvent) {
+        winnerLabel.setText("");
+        btn00.setDisable(false);
+        btn01.setDisable(false);
+        btn02.setDisable(false);
+        btn10.setDisable(false);
+        btn11.setDisable(false);
+        btn12.setDisable(false);
+        btn20.setDisable(false);
+        btn21.setDisable(false);
+        btn22.setDisable(false);
         btn00.setText("");
         btn01.setText("");
         btn02.setText("");
