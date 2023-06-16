@@ -49,6 +49,24 @@ public class UserController {
     private String currentPlayer = "X";
 
 
+    private Button[] buttons;
+
+    @FXML
+    public void initialize() {
+        turn.setText("X's turn");
+
+        userItem.setText("X");
+        computerItem.setText("O");
+        buttons = new Button[]{
+                btn00, btn01, btn02,
+                btn10, btn11, btn12,
+                btn20, btn21, btn22
+        };
+    }
+
+
+
+
     @FXML
     private void clickBtn(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
@@ -70,7 +88,7 @@ public class UserController {
         }
     }
 
-    private static boolean isBoardFull(String board[][]) {
+    private static boolean isBoardFull(String[][] board) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (board[i][j].equals("")) {
@@ -128,15 +146,11 @@ public class UserController {
     }
 
     private void disableButtons() {
-        btn00.setDisable(true);
-        btn01.setDisable(true);
-        btn02.setDisable(true);
-        btn10.setDisable(true);
-        btn11.setDisable(true);
-        btn12.setDisable(true);
-        btn20.setDisable(true);
-        btn21.setDisable(true);
-        btn22.setDisable(true);
+
+        for (Button button: buttons){
+            button.setDisable(true);
+        }
+
     }
 
     public void selectX(ActionEvent actionEvent) {
@@ -156,24 +170,19 @@ public class UserController {
 
 
     public void restart(ActionEvent actionEvent) {
+
         winnerLabel.setText("");
-        btn00.setDisable(false);
-        btn01.setDisable(false);
-        btn02.setDisable(false);
-        btn10.setDisable(false);
-        btn11.setDisable(false);
-        btn12.setDisable(false);
-        btn20.setDisable(false);
-        btn21.setDisable(false);
-        btn22.setDisable(false);
-        btn00.setText("");
-        btn01.setText("");
-        btn02.setText("");
-        btn10.setText("");
-        btn11.setText("");
-        btn12.setText("");
-        btn20.setText("");
-        btn21.setText("");
-        btn22.setText("");
+        restartAllBtn();
     }
+
+    private void restartAllBtn() {
+
+
+        for(Button b : buttons){
+            b.setDisable(false);
+            b.setText("");
+        }
+    }
+
+
 }
